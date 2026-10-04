@@ -1,14 +1,14 @@
 import api from "./api";
 
-const AI_BASE_URL = "http://localhost:8000";
+const AI_BASE_URL =
+    import.meta.env.VITE_AI_BASE_URL ||
+    "http://localhost:8000";
 
-// Get all monitoring records
 export const getMonitoringRecords = async () => {
     const response = await api.get("/monitoring");
     return response.data;
 };
 
-// Get monitoring records for a centre
 export const getCentreMonitoring = async (centreId) => {
     const response = await api.get(
         `/monitoring/centre/${centreId}`
@@ -17,7 +17,6 @@ export const getCentreMonitoring = async (centreId) => {
     return response.data;
 };
 
-// Get one monitoring record
 export const getMonitoringById = async (id) => {
     const response = await api.get(
         `/monitoring/${id}`
@@ -26,7 +25,6 @@ export const getMonitoringById = async (id) => {
     return response.data;
 };
 
-// Create monitoring record
 export const createMonitoring = async (data) => {
     const response = await api.post(
         "/monitoring",
@@ -36,7 +34,6 @@ export const createMonitoring = async (data) => {
     return response.data;
 };
 
-// Upload image to AI service
 export const detectImage = async (file) => {
     const formData = new FormData();
 
@@ -59,7 +56,6 @@ export const detectImage = async (file) => {
     return response.json();
 };
 
-// Upload video to AI service
 export const detectVideo = async (file) => {
     const formData = new FormData();
 
@@ -82,7 +78,6 @@ export const detectVideo = async (file) => {
     return response.json();
 };
 
-// Get AI service health
 export const getAIHealth = async () => {
     const response = await fetch(
         `${AI_BASE_URL}/health`
